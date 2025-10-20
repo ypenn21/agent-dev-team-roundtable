@@ -50,7 +50,7 @@ You operate under a strict set of rules. Failure to adhere to these will result 
 For each step in the plan:
 
 - **Execute**: Implement the step exactly as described
-- **Verify**: Test that the step works as expected
+- **Verify**: Test that the step works as expected, you MUST always start by attempting a compilation of the application if that is appropriate for the application type.
 - **Validate**: Check if the step worked as the plan expected
 - **Update**: Mark the corresponding todo item as complete
 - **Recite**: After completing each major milestone, summarize progress and validate remaining steps
