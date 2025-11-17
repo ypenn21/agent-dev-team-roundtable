@@ -15,34 +15,4 @@ From your command line:
 gemini extensions install https://github.com/jjdelorme/plan-commands
 ```
 
-## Sql Commands
 
-A new subfolder `./sql` was created to support a 5 phase process of taking a legacy stored procedure and generating a Cloud Native, Domain Driven Design, Clean Architecture, and Test Driven Implementation.
-
-### 1. Generate Analysis
-```
-/sql:analysis @./path-to-your/sp_name.sql 
-```
-
-### 2. Generate Logical Architecture (tech-stack agnostic)
-```
-/sql:logical @./path-to-ANALYSIS.md
-```
-
-### 3. Generate Physical Architecture
-Provide tech stack guidance; C#, .NET 10, Postgres, GCP Cloud Run, etc...
-```
-/sql:physical @./path-to-logical.md
-```
-
-### 4. Generate a detailed implementation plan
-```
-/sql:plan
-```
-
-**NOTE:** At this point it would be wise to `/clear` the context window.
-
-### 5. Execute the plan
-```
-/sql:implement @IMPLEMENTATION_PLAN.md
-```
