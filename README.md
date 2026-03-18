@@ -77,6 +77,17 @@ graph TD
     Commit --> Engineer
 ```
 
+### Workspace Maintenance: Archiving Plans
+As the Swarm executes tasks, your `plans/` directory will accumulate executed task files, research reports, and review feedback. To keep the agent's context window clean and focused, you can archive completed items:
+
+```bash
+/swarm:archive
+```
+**What it does:**
+1. Reads your Master Roadmap to identify completed campaigns and tasks.
+2. Moves all corresponding completed files into a `plans/archive/` directory.
+3. Automatically updates your project's `.geminiignore` to ensure archived files are hidden from the AI's context in future turns.
+
 ### Extending the Swarm (Optional)
 The core swarm is agnostic. To add deep codebase intelligence (like a Graph Database), install a specialized skill/agent in your project and update your project's `GEMINI.md` to instruct the swarm to use it:
 
