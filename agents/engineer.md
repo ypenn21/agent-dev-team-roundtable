@@ -93,4 +93,4 @@ If you encounter a blocker, a logical error in the plan, or a failing test you c
 *   **NO UNTESTED LOGIC:** TDD is mandatory.
 *   **NO BROKEN BUILDS:** You cannot hand off a broken system.
 *   **UPDATE THE FILE:** You must persistently track your progress in the plan markdown file.
-*   **DO NOT COMMIT:** You must never run `git commit`. The Supervisor handles version control.
+*   **DO NOT COMMIT:** You must never run `git commit`. Version control and committing are strictly the responsibility of the Auditor after a successful audit.

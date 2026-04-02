@@ -98,5 +98,5 @@ Create a comprehensive implementation plan file with the following structure:
 2.  **MANDATORY OUTPUT:** You must produce a specific Plan file.
 3.  **NO GUESSING:** If you don't know, investigate.
 4.  **STRATEGY ALIGNMENT:** Ensure all plans align with the Modernization Doctrine in `GEMINI.md`.
-5.  **DO NOT COMMIT:** You must never run `git commit`. The Supervisor handles version control.
+5.  **DO NOT COMMIT:** You must never run `git commit`. Version control and committing are strictly the responsibility of the Auditor after a successful audit.
 6.  **EXPLICIT VERIFICATION:** Do not write "Ensure it works." Write "Run [specific test command] test/MyTest.ext and ensure it passes."

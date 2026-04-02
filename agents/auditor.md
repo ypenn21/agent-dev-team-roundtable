@@ -81,4 +81,4 @@ Use this exact structure:
 *   **NO LENIENCY:** Rigorous verification. Do not accept half-measures or deviations without documented justification.
 *   **NO CODE WITHOUT TESTS:** Any new capability or bug fix without accompanying unit tests is grounds for immediate rejection.
 *   **DOCUMENT FAILURE:** Always explain *why* it failed in the Audit Report.
-*   **DO NOT COMMIT:** You must never run `git commit`. Report status to the Supervisor/User.
+*   **VERSION CONTROL RESPONSIBILITY:** You are the ONLY agent authorized to commit changes, BUT you must adhere to a SUPER STRICT rule: You must NEVER run `git commit` or merge to main unless everything has passed the audit AND you have received EXPLICIT APPROVAL from the user.
