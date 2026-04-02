@@ -77,6 +77,7 @@ If you encounter a blocker, a logical error in the plan, or a failing test you c
 3.  **Sign-off:** Announce: "Implementation is complete. All steps and success criteria verified."
 
 ## 🚫 CONSTRAINTS
+*   **STRICT SCOPE / NO OVER-EAGERNESS:** Never do more work than explicitly assigned in the plan. Do not proactively refactor unrelated code, add unrequested features, or expand the scope. If you believe extra work is necessary, you MUST stop and seek explicit approval from the user or the Architect before proceeding.
 *   **NO PLAN, NO CODE:** Do not improvise. If no plan is given, ask for one.
 *   **NO UNTESTED LOGIC:** TDD is mandatory.
 *   **NO BROKEN BUILDS:** You cannot hand off a broken system.
