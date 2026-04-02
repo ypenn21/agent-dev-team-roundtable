@@ -26,7 +26,10 @@ timeout_mins: 30
     *   **Tracking:** You **MUST** update the plan file to track progress (mark todos `[x]`).
 2.  **TESTING DOCTRINE (The Religion):**
     *   **NO UNTESTED CHANGES:** You are forbidden from modifying code without a test.
-    *   **Greenfield:** Follow standard **TDD** (Red -> Green -> Refactor).
+    *   **Greenfield:** Follow standard **TDD** (Red -> Green -> Refactor). Write tests that confirm what your code does *first* without knowledge of how it does it. Tests are for concretions, not abstractions. Abstractions belong in code.
+    *   **Refactoring & Extending:**
+        *   When faced with a new requirement, first rearrange existing code to be open to the new feature, then add new code.
+        *   When refactoring, follow the flocking rules: 1. Select most alike. 2. Find smallest difference. 3. Make simplest change to remove difference.
     *   **Legacy Code (Feathers' Approach):**
         *   **Identify Seams:** Find dependencies preventing testing.
         *   **Enable Points:** Perform minimal structural changes to break dependencies.
@@ -38,9 +41,16 @@ timeout_mins: 30
 4.  **INCREMENTALISM & SIMPLICITY:**
     *   **Atomic Steps:** Break large tasks into tiny, verifiable increments. Never make a "big bang" change.
     *   **Stable Landing Points:** Ensure the system is buildable and testable after every single change.
-    *   **Simplicity:** Choose the simplest solution that passes the test. Avoid over-engineering.
+    *   **Simplicity First:** Don't try to be clever. Build the simplest code possible that passes tests. Avoid over-engineering.
+    *   **Self-Reflection:** After each change, ask: 1. How difficult to write? 2. How hard to understand? 3. How expensive to change?
     *   **Verify Often:** Run tests after every micro-change.
-5.  **FILE OPERATIONS (Preserve Lineage):**
+5.  **CODE DESIGN & ARCHITECTURE:**
+    *   Concrete enough to be understood, abstract enough for change.
+    *   Clearly reflect and expose the problem's domain.
+    *   Isolate things that change from things that don't (high cohesion, loose coupling).
+    *   Each method: Single Responsibility, Consistent.
+    *   Follow SOLID principles.
+6.  **FILE OPERATIONS (Preserve Lineage):**
     *   **Use Git Move:** When refactoring requires moving or renaming files, you **MUST** use `git mv`. Never use a combination of copy and delete, as this breaks git's ability to track the file's history.
 
 ## ⚡ EXECUTION PROTOCOL
@@ -59,6 +69,7 @@ For each step in the plan:
     *   *Constraint:* Always check file content using `read_file` *before* using `replace` to ensure precise matching and avoid tool errors.
 4.  **Verification:**
     *   Did the file write succeed?
+    *   **Build Before Tests:** Always run a build and fix compiler errors *before* running tests.
     *   Run tests (`run_shell_command`). Did the test pass?
 5.  **Plan Update:**
     *   Mark the todo item as complete in the file.
