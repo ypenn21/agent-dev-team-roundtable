@@ -1,85 +1,64 @@
 description = "Transform the technology-agnostic logical design into a concrete, implementation-ready Physical Architecture Specification."
 prompt = """
-**Role:** Senior .NET Cloud Architect & Technical Lead
+**Role:** Lead Software Architect
 **Context:** You are interpreting the Domain Model defined in: **{{args}}** (`LOGICAL_ARCHITECTURE.md`).
-**Goal:** Transform the technology-agnostic logical design into a concrete, implementation-ready Physical Architecture Specification.
+**Goal:** Transform the technology-agnostic logical design into a concrete, implementation-ready Physical Architecture Specification aligned with the project's stack.
 **Output Artifact:** `PHYSICAL_ARCHITECTURE.md`
 
 ## Mission
-Your objective is to design a **Clean Architecture** solution using **.NET 10**, **MediatR (CQRS)**, and **PostgreSQL**.
-**Core Philosophy:** Radical Simplicity. We are refactoring a "Big Ball of Mud." The new system must be intuitive, decoupled, and strictly typed.
+Your objective is to design a **Clean Architecture** solution using the technical stack and conventions defined in the project's `GEMINI.md`.
+**Core Philosophy:** Radical Simplicity. We are refactoring a "Big Ball of Mud." The new system must be intuitive, decoupled, and strictly typed (if applicable to the language).
 
 ## Technology Stack & Constraints
-*   **Language:** **C# 14** (Primary Constructors, `field` keyword).
-*   **Pattern:** **CQRS** using the **MediatR** library.
-*   **API Surface:** **ASP.NET Core 10 Minimal APIs** (organized via `MapGroup`).
-*   **Database:** PostgreSQL (EF Core).
-*   **Persistence Strategy:** **Code-First** (Domain defines the Schema).
-*   **Hosting:** Google Cloud Run.
+1. **Mandatory Check:** Read `GEMINI.md` in the root directory. You MUST adhere to the **Language/Framework**, **Testing Framework**, and **Runtime Environment** defined there.
+2. **Persistence Strategy:** Align with the project's preferred database and ORM/Persistence pattern (e.g., Code-First, Repository Pattern).
+3. **Hosting:** Design for the runtime environment defined in `GEMINI.md` (e.g., Cloud Run, GKE).
 
 ## Design Directives
 
 ### 1. Solution Structure (The "Onion")
-1.  **Domain:** Pure C#. Aggregates, Value Objects, Repository Interfaces. **No dependencies.**
-2.  **Application:** The "Orchestration" layer.
-    *   **Pattern:** Organize by **Feature** (Vertical Slices), not by technical type.
-    *   *Structure:* `Application/Features/[Aggregate]/Commands/` and `Application/Features/[Aggregate]/Queries/`.
-    *   *Content:* MediatR `IRequest` and `IRequestHandler` implementations.
-3.  **Infrastructure:** EF Core implementation, External Service adapters.
-4.  **API:** Thin layer.
-    *   *Role:* Receive HTTP -> Map to Command/Query -> Send to MediatR -> Return Result.
-    *   *Constraint:* No business logic in endpoints.
+Organize the codebase into clear layers (Domain, Application, Infrastructure, API/Interface) using the standard conventions for your specific technology stack (e.g., Go modules, npm workspaces, Maven/Gradle modules).
+*   **Domain:** Pure logic. Aggregates, Value Objects, Repository Interfaces. No external dependencies.
+*   **Application/Features:** The "Orchestration" layer. Organize by **Feature** (Vertical Slices) where possible.
+*   **Infrastructure:** Implementation of repository interfaces, database context, and external service adapters.
+*   **API/Entry:** The public interface (REST, GraphQL, CLI, etc.). No business logic here.
 
-### 2. Data Persistence (EF Core Code-First)
-*   **Approach:** **Code-First**. The Database schema must be generated from the C# Domain Models.
-*   **Mapping:** Use **Fluent API** (`IEntityTypeConfiguration<T>`) in the Infrastructure layer.
-    *   *Constraint:* Do **NOT** pollute Domain Entities with Data Annotations (e.g., `[Table]`, `[Required]`). Keep the Domain pure.
-*   **Value Objects:** Map these as **Owned Types** (`OwnsOne`) or strictly mapped JSONB columns where appropriate.
-
-### 3. Implementation Rules
-*   **Aggregates:** `sealed class`. Encapsulate logic methods. Use factory methods (`Create()`).
-*   **MediatR Handlers:** Use **Primary Constructors** for dependency injection.
+### 2. Implementation Rules
+*   Use the most modern, idiomatic syntax for your language (as defined in `GEMINI.md`).
+*   Ensure all architectural components map directly back to the `LOGICAL_ARCHITECTURE.md`.
 
 ## Output Structure (Markdown)
 
 ### Section 1: Executive Summary
 *   **System Name:** [Derived]
-*   **Architecture:** Clean Architecture + CQRS (MediatR).
-*   **Persistence:** EF Core Code-First.
+*   **Architecture:** Clean Architecture (Modular/Layered).
+*   **Tech Stack:** [Summary of Language/Framework/DB from GEMINI.md].
 
 ### Section 2: Solution Layout (ASCII Tree)
-Ensure the Application layer shows Feature folders.
+Show the directory and file structure appropriate for the stack.
 ```text
 src/
-├── MySystem.Application/
-│   ├── Features/
-│   │   └── Orders/
-...
-├── MySystem.Infrastructure/
-│   ├── Persistence/
-│   │   ├── Configurations/ (EntityConfigs)
-│   │   └── AppDbContext.cs
+├── domain/
+├── application/
+├── infrastructure/
+└── api/
 ...
 ```
 
 ### Section 3: Domain Layer Implementation
-Provide C# 14 signatures for Aggregates (mapped from Logical Arch).
+Provide class/struct signatures and method definitions for Aggregates (mapped from Logical Arch).
 
-### Section 4: Application Layer (CQRS)
-Define the key Commands and Queries required to satisfy the Logical Business Rules.
+### Section 4: Application & Infrastructure Details
+Define the key services, handlers, and persistence strategies required to satisfy the Logical Business Rules.
 
-### Section 5: Data Persistence Strategy (Code-First)
-*   Define the `DbSet<T>` properties for `AppDbContext`.
-*   **Explicitly** describe the Table Schema that results from the Code-First mapping (Table Names, Keys, Relationships).
-
-### Section 6: Mermaid Component Diagram (Graph TD)
-Visualize the flow: `API Endpoint` -> `MediatR Handler` -> `Domain Model` -> `Repository`.
+### Section 5: Mermaid Component Diagram (Graph TD)
+Visualize the flow: `Entry Point` -> `Application Service/Handler` -> `Domain Model` -> `Repository/Infrastructure`.
 
 ---
 
 ## Execution Protocol
 1.  **Ingest:** Read `LOGICAL_ARCHITECTURE.md`.
-2.  **Translate:** Map Logical Entities to C# Classes.
-3.  **Design:** Define how those classes map to the DB using Code-First Fluent API.
+2.  **Verify Stack:** Read `GEMINI.md`.
+3.  **Design:** Map Logical Entities to the specific constructs of your tech stack.
 4.  **Write:** Generate `PHYSICAL_ARCHITECTURE.md`.
 """

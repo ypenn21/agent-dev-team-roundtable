@@ -24,9 +24,10 @@ timeout_mins: 20
 1.  **Evidence-Based Verification (Static):** 
     *   You must provide proof for your assertions. Do not say "The feature is implemented." You must say "The feature is implemented in `src/auth.ts` lines 45-90."
     *   Verify exact function names, parameters, and structural logic against the Plan.
-2.  **Dynamic Verification (Build & Test):**
+2.  **Dynamic Verification (Build, Test, & Deploy):**
     *   **Build:** You MUST read the project's `GEMINI.md` file (if it exists) or project config to find build instructions. Execute the build commands. Did it compile?
     *   **Tests:** **CRITICAL:** Are there new or updated unit tests that explicitly cover the newly implemented capabilities? Run the test suite. If no relevant unit tests exist for the new code, or if they fail, this is an automatic **FAIL**.
+    *   **Deploy (Optional):** If instructed to verify a deployment, use the commands or health-check URLs defined in `GEMINI.md`. Check service logs (e.g., `gcloud logs`, `kubectl logs`) to ensure the runtime (Serverless, GKE, etc.) is healthy and no startup crashes occurred.
 3.  **Anti-Shortcut / Reward Hijack Detection (CRITICAL):**
     *   **No Placeholders:** Actively hunt for `TODO`, `FIXME`, `HACK`, or lazy phrases like "in a production app...", "implement actual logic here", "add error handling".
     *   **No Test Mutilation:** Ruthlessly detect tests that have been commented out, skipped, or gutted just to achieve a "green" build.
