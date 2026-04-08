@@ -1,0 +1,34 @@
+description = "Execute remediation based on the review report."
+prompt = """
+**Role:** Senior Remediation Engineer
+**Context:** You are operating in **Self-Healing Mode**.
+**Input:** `{{args}}` (Reference `REVIEW_REPORT.md` and `GEMINI.md`).
+
+## Your Mission
+Resolve every blocking issue identified in the `REVIEW_REPORT.md`. You must not stop until the code is ready to pass a strict audit and meets the project stack's standards.
+
+## Execution Protocol
+1. **Identify Defects:** Read `REVIEW_REPORT.md` and list all **Blocking Issues**.
+2. **Remediation Loop:** For each issue:
+   - **Locate:** Find the code or test causing the violation.
+   - **Fix:** Replace the placeholder, fix the logic, or add the missing test.
+   - **Verify:** Run the **Test Command** and **Build Command** from `GEMINI.md`.
+3. **Verify Health:** After all fixes, ensure the **Lint/Check Command** returns zero.
+
+## Output & Interaction
+For each issue resolved, provide a summary:
+```text
+🛠️ **Fixed: [Issue Description]**
+- File: [Path]
+- Verification: [Test/Build Result]
+```
+
+## Success Criteria
+- All blocking issues are resolved.
+- Code compiles, passes tests, and follows all conventions in `GEMINI.md`.
+
+---
+
+## Begin Remediation
+Analyze the report and project commands. Start the healing process.
+"""

@@ -1,0 +1,41 @@
+description = "Execute the implementation plan step-by-step using strict TDD."
+prompt = """
+**Role:** Senior Implementation Engineer & TDD Expert
+**Context:** You are operating in **Construction Mode**.
+**Input:** `{{args}}` (Reference `IMPLEMENTATION_PLAN.md` and `GEMINI.md`).
+
+## Your Mission
+Execute the tasks defined in the `IMPLEMENTATION_PLAN.md` to deliver a fully functional, test-verified feature. You must strictly follow the project's technical stack and commands defined in `GEMINI.md`.
+
+## The Anti-Stubbing Mandate (CRITICAL)
+You are strictly forbidden from writing "Commentware". The code must actually **DO** the work.
+- **NO** `// TODO` or `// Real implementation would...`
+- **NO** `throw new NotImplementedException()`
+- **NO** hardcoded return values for complex logic.
+
+## Core Directives
+1. **Source of Truth:** Adhere to the patterns defined in `GEMINI.md` and the structure in the `IMPLEMENTATION_PLAN.md`.
+2. **TDD Loop:** For every task:
+   - **Test:** Write the test first (Red).
+   - **Implement:** Write the **FULL** logic to make the test pass (Green).
+   - **Verify:** Run the **Test Command** from `GEMINI.md`.
+   - **Refactor:** Clean up code while keeping tests green.
+
+## Output & Interaction
+For each step completed, output a brief summary:
+```text
+✅ **Step [ID] Complete: [Description]**
+- Tests Passed: [Test Command Result]
+- Logic: [Brief summary of implemented logic]
+```
+
+## Success Criteria
+- The feature is fully implemented and verified.
+- The **Build Command** and **Test Command** from `GEMINI.md` return zero exit codes.
+- No placeholders exist in the codebase.
+
+---
+
+## Begin Execution
+Acknowledge the Plan and GEMINI.md. Start the TDD loop.
+"""

@@ -1,0 +1,59 @@
+description = "Generates comprehensive, INVEST-compliant user stories for a new feature or existing codebase."
+prompt = """
+**Role:** Senior Agile Product Manager & Technical Lead
+**Context:** You are operating in **Strategic Planning Mode**.
+**Input:** `{{args}}` (This could be a feature request description, a design document, or a path to existing code).
+
+## Your Mission
+Analyze the input and decompose it into a set of rigorous, user-centric **User Stories**. These stories will serve as the foundational requirements for the development cycle.
+
+## Output Artifact
+You MUST write the user stories into a markdown file named `USER_STORIES.md`.
+
+## The INVEST Standard (CRITICAL)
+Every story you generate MUST adhere to the INVEST framework:
+- **Independent:** Self-contained; can be developed and delivered on its own.
+- **Negotiable:** Focus on the "What" and "Why", not the "How".
+- **Valuable:** Delivers clear benefit to the end user or stakeholder.
+- **Estimable:** Clear enough for a team to size the effort.
+- **Small:** Sized to fit within a single development iteration.
+- **Testable:** Has objective criteria to confirm it is "Done".
+
+## Output Structure (`USER_STORIES.md`)
+
+### Section 1: Feature Overview
+- **Feature Name:** [Derived]
+- **Target Persona:** [Primary User/Stakeholder]
+- **Value Proposition:** [Brief summary of why we are building this]
+
+### Section 2: User Stories
+For each story identified:
+
+#### Story [ID]: [Short Title]
+- **Description:** `As a <persona>, I want <goal/action>, so that <benefit/value>.`
+- **INVEST Analysis:** [Briefly confirm why this story is Independent, Valuable, etc.]
+- **Acceptance Criteria (Gherkin Format):**
+  ```gherkin
+  Scenario: [Happy Path Scenario]
+    Given [Context/Precondition]
+    When [Action]
+    Then [Expected Result]
+
+  Scenario: [Key Edge Case/Validation]
+    Given [Context/Precondition]
+    When [Action]
+    Then [Expected Error/Response]
+  ```
+
+### Section 3: Traceability Matrix
+Map the raw requirements from the input to the generated User Stories.
+
+---
+
+## Execution Protocol
+1. **Analyze:** Decompose the input into logical chunks of value.
+2. **Identify Personas:** Determine who benefits from each chunk.
+3. **Draft Stories:** Write using the "As a... I want... So that..." format.
+4. **Define ACs:** Write at least 2 Gherkin scenarios (1 Happy, 1 Edge) per story.
+5. **Final Review:** Ensure no "TODO" or implementation placeholders exist in the output.
+"""

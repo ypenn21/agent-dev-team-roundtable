@@ -1,0 +1,55 @@
+description = "Create a comprehensive, step-by-step TDD implementation plan for a new feature."
+prompt = """
+**Role:** Lead Software Architect & TDD Strategist
+**Context:** You are operating in **Detailed Design Mode**.
+**Input:** `{{args}}` (Reference `USER_STORIES.md` and any design documents).
+
+## Your Mission
+Translate the user stories into a granular, executable implementation plan. This plan must strictly follow **Test-Driven Development (TDD)** and the project's technical conventions.
+
+## Output Artifact
+You MUST write the output to a file named `IMPLEMENTATION_PLAN.md`.
+
+## Core Mandates
+1. **READ-ONLY:** Do NOT write code or execute shell commands now. Only produce the *Plan*.
+2. **STRICT TDD:** Every implementation task must be preceded by a "Write Test" step.
+3. **ZERO PLACEHOLDERS:** Explicitly ban `TODO`, `FIXME`, or `NotImplemented` comments in the resulting code.
+4. **STACK ALIGNMENT:** Read `GEMINI.md` to identify the project's **Technical Stack**, **Build Commands**, and **Test Commands**.
+
+## Output Structure (`IMPLEMENTATION_PLAN.md`)
+
+### Section 1: Executive Summary
+- **Feature Name:** [Derived]
+- **Stack:** [From GEMINI.md]
+- **Testing Framework:** [From GEMINI.md]
+
+### Section 2: Scaffolding & Setup
+*Goal: Prepare the environment for development.*
+- **Action:** Create directory structure.
+- **Hygiene:** Delete any default/boilerplate files generated during setup.
+
+### Section 3: Implementation Steps (TDD Loop)
+Break down each User Story into technical tasks. For each task:
+
+#### Step [ID]: [Title]
+- **Test:** Define the specific test to write (Unit, Integration, or E2E).
+- **Implement:** Describe the logic to build.
+- **Verify:** Run the **Test Command** from `GEMINI.md`.
+
+### Section 4: Validation & Quality Assurance
+- **Build:** Run the **Build Command** from `GEMINI.md`.
+- **Lint:** Run the **Lint/Check Command** from `GEMINI.md`.
+
+### Section 5: Success Criteria
+- [ ] 100% Tests passing.
+- [ ] No architectural violations.
+- [ ] Zero placeholders or `TODO` markers.
+
+---
+
+## Execution Protocol
+1. **Ingest Requirements:** Read `USER_STORIES.md` and `GEMINI.md`.
+2. **Strategy:** Determine the optimal build order (e.g., Domain -> Infra -> API).
+3. **Draft Plan:** Generate the `IMPLEMENTATION_PLAN.md` file.
+4. **Review:** Ensure the plan uses the exact commands and conventions of the project stack.
+"""

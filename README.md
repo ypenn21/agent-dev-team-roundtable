@@ -1,6 +1,6 @@
-# Gemini Swarm & Modernization Toolkit
+# Universal Gemini Swarm & Modernization Toolkit
 
-A comprehensive Gemini CLI Extension that provides a **Multi-Agent Swarm** for autonomous software development, alongside specialized, step-by-step commands for **SQL-to-DDD Refactoring**.
+A comprehensive Gemini CLI Extension that provides a **Multi-Agent Swarm** for autonomous software development, alongside a specialized, **stack-agnostic** pipeline for **SQL-to-DDD Refactoring**.
 
 **See** [Gemini CLI Extensions](https://github.com/google-gemini/gemini-cli/blob/main/docs/extensions/index.md) for more details.
 
@@ -25,7 +25,7 @@ While the agents (`architect`, `engineer`, `auditor`) are installed globally by 
    ```bash
    /swarm:init
    ```
-   *(This downloads the `system.md` file into your local `.gemini/` folder).*
+   *(This downloads the `system.md` file into your local `.gemini/` folder and a `GEMINI.md` template into your root).*
 3. **Restart** the Gemini CLI with the system override enabled:
    ```bash
    GEMINI_SYSTEM_MD=true gemini
@@ -83,34 +83,24 @@ As the Swarm executes tasks, your `plans/` directory will accumulate executed ta
 ```bash
 /swarm:archive
 ```
-**What it does:**
-1. Reads your Master Roadmap to identify completed campaigns and tasks.
-2. Moves all corresponding completed files into a `plans/archive/` directory.
-3. Automatically updates your project's `.geminiignore` to ensure archived files are hidden from the AI's context in future turns.
 
 ### Extending the Swarm (Optional)
-The core swarm is agnostic. To add deep codebase intelligence (like a Graph Database), install a specialized skill/agent in your project and update your project's `GEMINI.md` to instruct the swarm to use it:
-
-```markdown
-# Swarm Routing & Delegation Rules (Add to your project's GEMINI.md)
-- For codebase investigation, you MUST delegate to the `scout` agent. Do NOT use the built-in investigator.
-- The `auditor` agent MUST utilize the `graphdb` skill for verifying changes.
-```
+The core swarm is agnostic. To add deep codebase intelligence (like a Graph Database), install a specialized skill/agent in your project and update your project's `GEMINI.md` to instruct the swarm to use it.
 
 ---
 
-## 🏗️ 2. DDD Refactoring Commands
-A specialized workflow for refactoring legacy code (specifically SQL) into a modern **.NET, Domain-Driven Design (DDD)** architecture.
+## 🏗️ 2. DDD Refactoring Commands (SQL-to-Modernization)
+A specialized workflow for refactoring legacy code (specifically SQL) into a modern, **Domain-Driven Design (DDD)** architecture.
 
-**Architecture:** .NET 10, C# 14, MediatR (CQRS), EF Core (Code-First).
+**Architecture:** Stack-Agnostic (supports .NET, Java, Go, Python, TypeScript, etc. via `GEMINI.md`).
 **Methodology:** Domain-Driven Design (DDD) via Test-Driven Development (TDD).
 
 ### The Workflow
-**CRITICAL:** This pipeline is state-sensitive. After every step, review the output artifact, then type `/clear` to reset the context window to prevent "Context Pollution."
+**CRITICAL:** This pipeline is state-sensitive. After every step, review the output artifact, then type `/clear` to reset the context window.
 
 #### Step 0: User Story Generation (Optional)
 *Generates agile user stories from existing code to help understand the current system.*
-*   **Command:** `/ddd:create-user-stories {{path/to/code}}`
+*   **Command:** `/ddd-sql-transformation:create-user-stories {{path/to/code}}`
 *   **Output:** `user-stories.md`
 
 #### Step 1: Deep Analysis (SQL)
@@ -120,33 +110,33 @@ A specialized workflow for refactoring legacy code (specifically SQL) into a mod
 
 #### Step 2: Logical Architecture
 *Transforms the Analysis into a pure Domain Model (Aggregates, Entities, Rules).*
-*   **Command:** `/ddd:logical {{ANALYSIS_[ProcName].md}}`
+*   **Command:** `/ddd-sql-transformation:logical {{ANALYSIS_[ProcName].md}}`
 *   **Output:** `LOGICAL_ARCHITECTURE.md`
 
 #### Step 3: Physical Architecture
-*Maps the Domain Model to .NET 10, MediatR, and EF Core patterns.*
-*   **Command:** `/ddd:physical {{LOGICAL_ARCHITECTURE.md}}`
+*Maps the Domain Model to the technology stack defined in `GEMINI.md`.*
+*   **Command:** `/ddd-sql-transformation:physical {{LOGICAL_ARCHITECTURE.md}}`
 *   **Output:** `PHYSICAL_ARCHITECTURE.md`
 
 #### Step 4: Implementation Planning
 *Generates a step-by-step TDD execution plan.*
-*   **Command:** `/ddd:plan {{PHYSICAL_ARCHITECTURE.md}}`
+*   **Command:** `/ddd-sql-transformation:plan {{PHYSICAL_ARCHITECTURE.md}}`
 *   **Output:** `IMPLEMENTATION_PLAN.md`
 
 #### Step 5: Build & Implementation
 *Executes the plan using strict Red-Green-Refactor TDD.*
-*   **Command:** `/ddd:implement {{IMPLEMENTATION_PLAN.md}}`
-*   **Output:** Actual C# code in `src/` and tests in `tests/`.
+*   **Command:** `/ddd-sql-transformation:implement {{IMPLEMENTATION_PLAN.md}}`
+*   **Output:** Source code in `src/` and tests in `tests/` (following `GEMINI.md` patterns).
 
 ### The Quality Assurance Loop
 Once the code is built, do not ship it. Enter the **Review/Fix Loop**.
 
 #### Step 6: Code Review (Quality Gate)
 *Audits the code for "Laziness", Stubbing, and missing Business Rules.*
-*   **Command:** `/ddd:review`
+*   **Command:** `/ddd-sql-transformation:review`
 *   **Output:** `REVIEW_REPORT.md` (Look for `🔴 REJECT` or `🟢 PASS`)
 
 #### Step 7: Remediation (Self-Healing)
 *If Step 6 failed, this command fixes the specific issues listed in the report.*
-*   **Command:** `/ddd:fix {{REVIEW_REPORT.md}}`
-*   **Next Step:** Go back to **Step 6** (`/ddd:review`). Repeat until **PASS**.
+*   **Command:** `/ddd-sql-transformation:fix {{REVIEW_REPORT.md}}`
+*   **Next Step:** Go back to **Step 6** (`/ddd-sql-transformation:review`). Repeat until **PASS**.
