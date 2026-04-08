@@ -13,7 +13,7 @@ Install the [Gemini CLI](https://github.com/google-gemini/gemini-cli)
 From your command line:
 
 ```bash
-gemini extensions install https://github.com/jjdelorme/plan-commands
+gemini extensions install https://github.com/ypenn21/agent-dev-team-roundtable.git
 ```
 
 ### Activating the Swarm Supervisor (Per-Workspace)
