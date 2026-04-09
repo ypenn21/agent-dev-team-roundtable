@@ -1,14 +1,13 @@
-description = "Initializes the local repository with the Swarm Supervisor (system.md) and the Universal GEMINI.md template."
+description = "Initializes the local repository with the Swarm Supervisor (system.md)."
 prompt = """
-You are setting up the Gemini Swarm Supervisor and Universal Configuration for the current workspace.
+You are setting up the Gemini Swarm Supervisor for the current workspace.
 
 Your instructions:
-1. Execute the following shell command to download the `system.md` file into the `.gemini/` directory and the `GEMINI.md` template into the root directory:
+1. Execute the following shell command to download the `system.md` file into the `.gemini/` directory:
 
    ```bash
    mkdir -p .gemini
    curl -s -o .gemini/system.md https://raw.githubusercontent.com/ypenn21/agent-dev-team-roundtable/main/system.md
-   curl -s -o GEMINI.md https://raw.githubusercontent.com/ypenn21/agent-dev-team-roundtable/main/GEMINI.md
    ```
 
 2. Output the following exact success message to the user:
@@ -16,10 +15,9 @@ Your instructions:
    **✅ Swarm Initialized!**
 
    The `system.md` Supervisor protocol has been downloaded to `.gemini/system.md`.
-   The `GEMINI.md` Universal template has been downloaded to the project root.
 
    **⚠️ Critical Next Steps:**
-   1. **Configure Your Stack:** Open `GEMINI.md` and define your project's technology stack and commands (Build, Test, Deploy).
+   1. **Configure Your Stack:** Ensure your project's `GEMINI.md` defines your technology stack and commands (Build, Test, Deploy).
    2. **Activate the Supervisor:** Restart the Gemini CLI with the following environment variable:
 
    ```bash

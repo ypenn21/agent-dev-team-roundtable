@@ -25,7 +25,7 @@ While the agents (`architect`, `engineer`, `auditor`) are installed globally by 
    ```bash
    /swarm:init
    ```
-   *(This downloads the `system.md` file into your local `.gemini/` folder and a `GEMINI.md` template into your root).*
+   *(This downloads the `system.md` file into your local `.gemini/` folder).*
 3. **Restart** the Gemini CLI with the system override enabled:
    ```bash
    GEMINI_SYSTEM_MD=true gemini
