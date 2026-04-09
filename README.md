@@ -1,6 +1,6 @@
 # Universal Gemini Swarm & Modernization Toolkit
 
-A comprehensive Gemini CLI Extension that provides a **Multi-Agent Swarm** for autonomous software development, alongside a specialized, **stack-agnostic** pipeline for **SQL-to-DDD Refactoring**.
+A comprehensive Gemini CLI Extension that provides a **Multi-Agent Swarm** for autonomous software development, alongside specialized, **stack-agnostic** pipelines for **Feature Planning** and **SQL-to-DDD Refactoring**.
 
 **See** [Gemini CLI Extensions](https://github.com/google-gemini/gemini-cli/blob/main/docs/extensions/index.md) for more details.
 
@@ -84,59 +84,59 @@ As the Swarm executes tasks, your `plans/` directory will accumulate executed ta
 /swarm:archive
 ```
 
-### Extending the Swarm (Optional)
-The core swarm is agnostic. To add deep codebase intelligence (like a Graph Database), install a specialized skill/agent in your project and update your project's `GEMINI.md` to instruct the swarm to use it.
+---
+
+## 🏗️ 2. Generic Feature Planning & Implementation
+A universal, stack-agnostic workflow for designing and building any software feature (API endpoints, UI components, IaC, scripts, etc.).
+
+### The Workflow
+**CRITICAL:** This pipeline is artifact-driven. After every step, review the output, then type `/clear`.
+
+#### Step 1: Strategic Planning (User Stories)
+*Analyze the requirement and generate INVEST-compliant user stories.*
+- **Command:** `/plan:create-user-stories {{feature_description_or_path}}`
+- **Output:** `USER_STORIES.md`
+
+#### Step 2: Tactical Planning (Execution Plan)
+*Translate user stories into a step-by-step TDD implementation plan.*
+- **Command:** `/plan:plan {{USER_STORIES.md}}`
+- **Output:** `IMPLEMENTATION_PLAN.md`
+
+#### Step 3: Construction (Build)
+*Execute the plan step-by-step using strict TDD.*
+- **Command:** `/plan:implement {{IMPLEMENTATION_PLAN.md}}`
+- **Output:** Source code and tests.
+
+#### Step 4: Quality Gate (Review & Fix)
+*Audit the code and remediate issues until PASS.*
+- **Review Command:** `/plan:review {{USER_STORIES.md}}`
+- **Fix Command:** `/plan:fix {{REVIEW_REPORT.md}}`
 
 ---
 
-## 🏗️ 2. DDD Refactoring Commands (SQL-to-Modernization)
+## 🏗️ 3. DDD Refactoring Commands (SQL-to-Modernization)
 A specialized workflow for refactoring legacy code (specifically SQL) into a modern, **Domain-Driven Design (DDD)** architecture.
 
 **Architecture:** Stack-Agnostic (supports .NET, Java, Go, Python, TypeScript, etc. via `GEMINI.md`).
 **Methodology:** Domain-Driven Design (DDD) via Test-Driven Development (TDD).
 
 ### The Workflow
-**CRITICAL:** This pipeline is state-sensitive. After every step, review the output artifact, then type `/clear` to reset the context window.
-
-#### Step 0: User Story Generation (Optional)
-*Generates agile user stories from existing code to help understand the current system.*
-*   **Command:** `/ddd-sql-transformation:create-user-stories {{path/to/code}}`
-*   **Output:** `user-stories.md`
-
 #### Step 1: Deep Analysis (SQL)
-*Deep analysis of legacy Stored Procedures. Extracts business rules, data dictionaries, and test cases.*
-*   **Command:** `/sql:analyze {{path/to/legacy_proc.sql}}`
-*   **Output:** `ANALYSIS_[ProcName].md`
+- **Command:** `/sql:analyze {{path/to/legacy_proc.sql}}`
+- **Output:** `ANALYSIS_[ProcName].md`
 
-#### Step 2: Logical Architecture
-*Transforms the Analysis into a pure Domain Model (Aggregates, Entities, Rules).*
-*   **Command:** `/ddd-sql-transformation:logical {{ANALYSIS_[ProcName].md}}`
-*   **Output:** `LOGICAL_ARCHITECTURE.md`
+#### Step 2: Logical & Physical Architecture
+- **Logical Command:** `/ddd-sql-transformation:logical {{ANALYSIS_[ProcName].md}}`
+- **Physical Command:** `/ddd-sql-transformation:physical {{LOGICAL_ARCHITECTURE.md}}`
 
-#### Step 3: Physical Architecture
-*Maps the Domain Model to the technology stack defined in `GEMINI.md`.*
-*   **Command:** `/ddd-sql-transformation:physical {{LOGICAL_ARCHITECTURE.md}}`
-*   **Output:** `PHYSICAL_ARCHITECTURE.md`
+#### Step 3: Implementation Planning
+- **Command:** `/ddd-sql-transformation:plan {{PHYSICAL_ARCHITECTURE.md}}`
+- **Output:** `IMPLEMENTATION_PLAN.md`
 
-#### Step 4: Implementation Planning
-*Generates a step-by-step TDD execution plan.*
-*   **Command:** `/ddd-sql-transformation:plan {{PHYSICAL_ARCHITECTURE.md}}`
-*   **Output:** `IMPLEMENTATION_PLAN.md`
+#### Step 4: Build & Implementation
+- **Command:** `/ddd-sql-transformation:implement {{IMPLEMENTATION_PLAN.md}}`
+- **Output:** Actual source code and tests.
 
-#### Step 5: Build & Implementation
-*Executes the plan using strict Red-Green-Refactor TDD.*
-*   **Command:** `/ddd-sql-transformation:implement {{IMPLEMENTATION_PLAN.md}}`
-*   **Output:** Source code in `src/` and tests in `tests/` (following `GEMINI.md` patterns).
-
-### The Quality Assurance Loop
-Once the code is built, do not ship it. Enter the **Review/Fix Loop**.
-
-#### Step 6: Code Review (Quality Gate)
-*Audits the code for "Laziness", Stubbing, and missing Business Rules.*
-*   **Command:** `/ddd-sql-transformation:review`
-*   **Output:** `REVIEW_REPORT.md` (Look for `🔴 REJECT` or `🟢 PASS`)
-
-#### Step 7: Remediation (Self-Healing)
-*If Step 6 failed, this command fixes the specific issues listed in the report.*
-*   **Command:** `/ddd-sql-transformation:fix {{REVIEW_REPORT.md}}`
-*   **Next Step:** Go back to **Step 6** (`/ddd-sql-transformation:review`). Repeat until **PASS**.
+#### Step 5: Review & Fix
+- **Review Command:** `/ddd-sql-transformation:review`
+- **Fix Command:** `/ddd-sql-transformation:fix {{REVIEW_REPORT.md}}`
