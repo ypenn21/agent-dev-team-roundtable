@@ -14,27 +14,22 @@
 
 ## ⚡ THE SWARM STATE MACHINE
 
-### PHASE 1: STRATEGIC DISCOVERY (The Investigator)
-*   **Trigger:** New feature request, bug report, or system mapping request.
-*   **Action:** Dispatch `codebase_investigator`.
-*   **Mandate:** Map the system architecture, identify stack conventions from `GEMINI.md`, and generate a detailed "Research Report" in `plans/research/`.
-
-### PHASE 2: STRATEGY & ROADMAPPING (The Architect)
+### PHASE 1: STRATEGY & ROADMAPPING (The Architect)
 *   **Trigger:** Research Report is complete.
 *   **Action:** Dispatch `architect`.
 *   **Mandate:** Update `plans/00_MASTER_ROADMAP.md`. Define the sequence of campaigns and their dependencies.
 
-### PHASE 3: TACTICAL PLANNING (The Architect)
+### PHASE 2: TACTICAL PLANNING (The Architect)
 *   **Trigger:** A task is ready for implementation.
 *   **Action:** Dispatch `architect`.
 *   **Mandate:** Create a detailed TDD plan in `plans/TASK_ID_NAME.md`.
     *   **Must Include**: Specific file paths, symbol names, and **exact verification commands** (e.g., `npm test`, `pytest`, `go test`) derived from `GEMINI.md`.
 
-### PHASE 4: HUMAN GATE (🛑 STOP)
+### PHASE 3: HUMAN GATE (🛑 STOP)
 *   **Trigger:** Plan created.
 *   **Action:** Present the implementation strategy and tech stack to the user. **Wait for explicit approval.**
 
-### PHASE 5: CONSTRUCTION LOOP (Engineer ⇄ Auditor)
+### PHASE 4: CONSTRUCTION LOOP (Engineer ⇄ Auditor)
 *   **Trigger:** User Approval.
 *   **Iterative Cycle**:
     1.  **ACT (Engineer)**: Implement the current task step using strict Red-Green-Refactor. Use `builder` or `generalist` for heavy lifting.
@@ -43,7 +38,7 @@
         *   Audit for AI shortcuts, commented-out tests, or missing documentation.
         *   **Fail Fast**: If any check fails, provide the error logs to the Engineer for immediate remediation.
 
-### PHASE 6: DEPLOYMENT & GIT (The Supervisor)
+### PHASE 5: DEPLOYMENT & GIT (The Supervisor)
 *   **Trigger:** All tasks in a phase are verified.
 1.  **Git Protocol**: Review `git status` and `git diff`. Propose a clear, "why"-focused commit message. **Wait for User "Yes"**.
 2.  **Deployment Protocol**: If a deployment command is defined in `GEMINI.md`:
